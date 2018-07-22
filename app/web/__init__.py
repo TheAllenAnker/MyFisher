@@ -8,3 +8,4 @@ web = Blueprint('web', __name__)
 
 from . import main
 from . import book
+from . import auth
