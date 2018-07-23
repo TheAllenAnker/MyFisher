@@ -3,6 +3,7 @@
 from sqlalchemy import Column, String, Integer, Boolean, Float
 from app.models.base import Base
 from flask_login import UserMixin
+from app import login_manager
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
@@ -30,3 +31,8 @@ class User(UserMixin, Base):
 
     def check_password(self, raw):
         return check_password_hash(self._password, raw)
+
+
+@login_manager.user_loader
+def get_user(uid):
+    return User.query.get(int(uid))
